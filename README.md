@@ -22,7 +22,8 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/layer5.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=mesheryio)
 [![Discuss Users](https://img.shields.io/discourse/users?server=http%3A%2F%2Fdiscuss.meshery.io)](https://meshery.io/community#discussion-forums)
 [![Slack](https://img.shields.io/badge/Slack-@layer5.svg?logo=slack)](http://slack.meshery.io)
-[![Youtube](https://img.shields.io/youtube/channel/subscribers/UC0b1d2c9a8e3f6b4c5f7e2A?style=social&label=YouTube)](https://www.youtube.com/@mesheryio?sub_confirmation=1)
+<a href="https://youtube.com/@mesheryio?sub_confirmation=1" alt="YouTube">
+   <img src="https://img.shields.io/youtube/channel/subscribers/UCgXlqWDCg-9RP1eckf0s6KA?style=social" /></a>
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3564/badge)](https://bestpractices.coreinfrastructure.org/projects/3564)
 
 </div>
