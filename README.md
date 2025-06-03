@@ -18,12 +18,10 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery-linkerd/multi-platform.yml?branch=master)](https://github.com/meshery/meshery-linkerd/actions)
 [![GitHub](https://img.shields.io/github/license/meshery/meshery-linkerd.svg)](https://github.com/meshery/meshery-linkerd/blob/master/LICENSE)
 [![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery-linkerd/help%20wanted.svg)](https://github.com/meshery/meshery-linkerd/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-[![Website](https://img.shields.io/website/https/layer5.io/meshery.svg)](https://meshery.io/)
-[![Twitter Follow](https://img.shields.io/twitter/follow/layer5.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=mesheryio)
+[![Website](https://img.shields.io/website/https/meshery.io/meshery.svg)](https://meshery.io/)
+[![Twitter Follow](https://img.shields.io/twitter/follow/meshery.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=mesheryio)
 [![Discuss Users](https://img.shields.io/discourse/users?server=http%3A%2F%2Fdiscuss.meshery.io)](https://meshery.io/community#discussion-forums)
-[![Slack](https://img.shields.io/badge/Slack-@layer5.svg?logo=slack)](http://slack.meshery.io)
-<a href="https://youtube.com/@mesheryio?sub_confirmation=1" alt="YouTube">
-   <img src="https://img.shields.io/youtube/channel/subscribers/UCgXlqWDCg-9RP1eckf0s6KA?style=social" /></a>
+[![Slack](https://img.shields.io/badge/Slack-@meshery.svg?logo=slack)](http://slack.meshery.io)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3564/badge)](https://bestpractices.coreinfrastructure.org/projects/3564)
 
 </div>
@@ -39,7 +37,7 @@ As a self-service engineering platform, <a href="https://meshery.io">Meshery</a>
 
 <p style="clear:both;">
 <h2><a name="contributing"></a><a name="community"></a> <a href="https://slack.meshery.io">Community</a> and <a href="https://docs.meshery.io/project/contributing">Contributing</a></h2>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://meshery.io/newcomers">Contributor Journey Map</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a>! Contributors are expected to adhere to the <a href="https://github.com/cncf/foundation/blob/master/code-of-conduct.md">CNCF Code of Conduct</a>.
+Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.meshery.io/project/contributing">Contributor Journey Map</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a>! Contributors are expected to adhere to the <a href="https://github.com/cncf/foundation/blob/master/code-of-conduct.md">CNCF Code of Conduct</a>.
 
 <a href="https://slack.meshery.io"><img alt="Meshery Slack" src="img/readme/slack-128.png" style="margin-left:10px;padding-top:5px;" width="110px" align="right" /></a>
 
@@ -52,7 +50,7 @@ Our projects are community-built and welcome collaboration. 👍 Be sure to see 
 ✔️ <em><strong>Discuss</strong></em> in the <a href="https://meshery.io/community#discussion-forums">Community Forum</a>.<br />
 </p>
 <p align="center">
-<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+org%3Alayer5labs+label%3A%22help+wanted%22+">help-wanted label</a>.
+<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">help-wanted label</a>.
 </p>
 
 **License**
