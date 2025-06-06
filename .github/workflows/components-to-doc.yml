@@ -58,6 +58,6 @@ jobs:
           destination_repo: 'meshery/meshery'
           destination_folder: 'docs/_integrations/linkerd'
           destination_branch: 'master'
-          user_email: 'ci@layer5.io'
+          user_email: 'ci@meshery.io'
           user_name: 'l5io'
           commit_msg: 'Adapters Component added'
