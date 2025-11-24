@@ -1,0 +1,30 @@
+# Automatically label Pull Requests based on changed files
+version: 1
+
+rules:
+  - name: "Go Code Changes"
+    labels:
+      - "language/go"
+    files:
+      - "*.go"
+      - "**/*.go"
+
+  - name: "Documentation Changes"
+    labels:
+      - "area/docs"
+    files:
+      - "*.md"
+      - "docs/**"
+
+  - name: "CI Workflow Changes"
+    labels:
+      - "area/ci"
+    files:
+      - ".github/workflows/**"
+
+  - name: "Templates Changes"
+    labels:
+      - "area/templates"
+    files:
+      - "templates/**"
+
