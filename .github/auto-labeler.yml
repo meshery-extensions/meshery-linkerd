@@ -1,30 +1,21 @@
----
-# Automatically label Pull Requests based on changed files
-version: 1
+language/go:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "*.go"
+          - "**/*.go"
 
-rules:
-  - name: "Go Code Changes"
-    labels:
-      - "language/go"
-    files:
-      - "*.go"
-      - "**/*.go"
+area/docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "*.md"
+          - "docs/**"
 
-  - name: "Documentation Changes"
-    labels:
-      - "area/docs"
-    files:
-      - "*.md"
-      - "docs/**"
+area/ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
 
-  - name: "CI Workflow Changes"
-    labels:
-      - "area/ci"
-    files:
-      - ".github/workflows/**"
-
-  - name: "Templates Changes"
-    labels:
-      - "area/templates"
-    files:
-      - "templates/**"
+area/templates:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "templates/**"
