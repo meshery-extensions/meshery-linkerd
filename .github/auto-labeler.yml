@@ -1,0 +1,21 @@
+language/go:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "*.go"
+          - "**/*.go"
+
+area/docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "*.md"
+          - "docs/**"
+
+area/ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+
+area/templates:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "templates/**"
