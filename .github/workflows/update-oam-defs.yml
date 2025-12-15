@@ -1,4 +1,5 @@
 name: Meshery Linkerd Pattern Components Generator
+permissions: read-all
 on:
   push:
     branches:

@@ -1,5 +1,6 @@
 name: (E2E Tests) Meshery Adapter for Linkerd Tests
-
+permissions:
+  contents: read
 on:
   push:
     branches:
@@ -70,6 +71,8 @@ jobs:
     needs: TestLinkerd
     if:  "always() && github.event_name != 'pull_request' "
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Skip if needed
         run: |

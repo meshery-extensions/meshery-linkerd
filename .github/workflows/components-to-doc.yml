@@ -1,4 +1,6 @@
 name: Components to Documents
+permissions:
+  contents: read
 on:
   push:
     paths:
@@ -9,6 +11,8 @@ on:
 jobs:
   CopyComponents:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@master
 

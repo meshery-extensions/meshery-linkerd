@@ -1,5 +1,5 @@
 name: Meshery Linkerd Workflow
-
+permissions: read-all
 on:
   # No one should be pushing to master directly.
   push:
