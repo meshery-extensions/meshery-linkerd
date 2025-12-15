@@ -19,7 +19,7 @@ jobs:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           ref: "master"
       - name: Setup Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v6
         with:
           go-version: 1.23
       - name: Run adapter to create components
@@ -36,7 +36,7 @@ jobs:
           done
           rm log.txt
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           file_pattern: templates/
           commit_user_name: l5io

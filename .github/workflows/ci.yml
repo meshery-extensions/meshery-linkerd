@@ -22,7 +22,7 @@ jobs:
       yaml_changes: ${{ steps.filter.outputs.yaml_changes }}
     steps:
       - uses: actions/checkout@master
-      - uses: dorny/paths-filter@v2
+      - uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
@@ -37,13 +37,13 @@ jobs:
     if: needs.detect_changes.outputs.go_changes == 'true'
     steps:
     - name: Setup go
-      uses: actions/setup-go@v4
+      uses: actions/setup-go@v6
       with:
         go-version: 1.23
     - name: Checkout repository
       uses: actions/checkout@master
     - name: Run Linters
-      uses: golangci/golangci-lint-action@v3
+      uses: golangci/golangci-lint-action@v9
       with:
         version: latest
         args: --timeout=5m
@@ -55,14 +55,14 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@master
         - name: Set up Go
-          uses: actions/setup-go@v4
+          uses: actions/setup-go@v6
           with:
             go-version: 1.23.x
         - name: Run unit tests
           run: go test --short ./... -race -coverprofile=coverage.txt -covermode=atomic
         - name: Upload coverage to Codecov
           if: github.repository == 'meshery/meshery-linkerd'
-          uses: codecov/codecov-action@v3
+          uses: codecov/codecov-action@v5
           with:
             files: ./coverage.txt
             flags: unittests
