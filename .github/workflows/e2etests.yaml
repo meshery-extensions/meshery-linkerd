@@ -40,7 +40,7 @@ jobs:
            yq e -i '.services.linkerd.version="${{ steps.gettag.outputs.release }}"' ./.github/install/deploy.yaml 
            cat ./.github/install/deploy.yaml
       - name: Uploading file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: patternfile
           path: ./.github/install/deploy.yaml
@@ -85,7 +85,7 @@ jobs:
           repository: meshery/meshery 
           token: ${{ secrets.GH_ACCESS_TOKEN }}   
       - name: DownloadJSON
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: data.json
       - name: echo results
@@ -118,7 +118,7 @@ jobs:
           mv test.md $filename.md
           rm data.json
       - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           file_pattern: docs
           commit_user_name: l5io
