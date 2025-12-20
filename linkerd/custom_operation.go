@@ -13,4 +13,4 @@ func (linkerd *Linkerd) applyCustomOperation(namespace string, manifest string, 
 	}
 
 	return status.Completed, nil
-}
+}   
