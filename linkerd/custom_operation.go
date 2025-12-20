@@ -12,5 +12,5 @@ func (linkerd *Linkerd) applyCustomOperation(namespace string, manifest string, 
 		return st, ErrCustomOperation(err)
 	}
 
-	return status.Completed, nil
+	return status.Completed, nil  
 }
