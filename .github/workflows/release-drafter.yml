@@ -1,5 +1,6 @@
 name: Release Drafter
-
+permissions:
+  contents: write
 on:
   push:
     # our release branch

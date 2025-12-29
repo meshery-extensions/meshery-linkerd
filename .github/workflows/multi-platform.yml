@@ -1,4 +1,5 @@
 name: Multi-Platform Build and Release
+permissions: read-all
 on:
   release:
     types: [published]

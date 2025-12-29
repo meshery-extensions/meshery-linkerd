@@ -1,4 +1,6 @@
 name: Release Meshery Linkerd Adapter
+permissions:
+  contents: read
 on:
   release:
     types: [published]
@@ -12,6 +14,9 @@ jobs:
   build:
     name: Build check
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    
     # needs: [lint, error_check, static_check, vet, sec_check, tests]
     steps:
     - name: Check out code
@@ -26,6 +31,9 @@ jobs:
   docker:
     name: Docker build and push
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: read
     steps:
     - name: Check out code
       uses: actions/checkout@v6

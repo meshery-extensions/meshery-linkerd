@@ -4,13 +4,13 @@ language/go:
           - "cmd/**/*.go"
           - "pkg/**/*.go"
           - "internal/**/*.go"
-          - "*.go"
+          - "**/*.go"
 
 area/docs:
   - changed-files:
       - any-glob-to-any-file:
           - "docs/**/*.md"
-          - "*.md"
+          - "**/*.md"
 
 language/markdown:
   - changed-files:
