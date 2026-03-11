@@ -60,7 +60,7 @@ jobs:
         with:
           source_folder: 'output'
           destination_repo: 'meshery/meshery'
-          destination_folder: 'docs/_integrations/linkerd'
+          destination_folder: 'docs/integrations/linkerd'
           destination_branch: 'master'
           user_email: 'ci@meshery.io'
           user_name: 'l5io'
