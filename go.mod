@@ -1,6 +1,7 @@
 module github.com/layer5io/meshery-linkerd
 
-go 1.23
+go 1.23.0
+
 toolchain go1.24.1
 
 replace github.com/kudobuilder/kuttl => github.com/layer5io/kuttl v0.4.1-0.20200723152044-916f10574334
@@ -36,7 +37,7 @@ require (
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/chai2010/gettext-go v1.0.2 // indirect
-	github.com/cloudflare/circl v1.3.3 // indirect
+	github.com/cloudflare/circl v1.6.3 // indirect
 	github.com/cockroachdb/apd/v3 v3.2.1 // indirect
 	github.com/containerd/containerd v1.7.11 // indirect
 	github.com/containerd/log v0.1.0 // indirect
