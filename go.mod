@@ -1,7 +1,8 @@
 module github.com/layer5io/meshery-linkerd
 
-go 1.23
-toolchain go1.24.1
+go 1.25
+
+toolchain go1.25.0
 
 replace github.com/kudobuilder/kuttl => github.com/layer5io/kuttl v0.4.1-0.20200723152044-916f10574334
 
