@@ -11,13 +11,23 @@ on:
       - '.github/**'
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v6
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v6
+      with:
+        version: latest
+
   build:
     name: Build check
     runs-on: ubuntu-24.04
     permissions:
       contents: read
-    
-    # needs: [lint, error_check, static_check, vet, sec_check, tests]
+    needs: [lint] 
     steps:
     - name: Check out code
       uses: actions/checkout@v6
