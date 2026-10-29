@@ -1,6 +1,6 @@
 module github.com/layer5io/meshery-linkerd
 
-go 1.27.1
+go 1.27.3
 
 replace github.com/kudobuilder/kuttl => github.com/layer5io/kuttl v0.4.1-0.20200723152044-916f10574334
 
