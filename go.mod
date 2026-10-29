@@ -1,6 +1,6 @@
 module github.com/layer5io/meshery-linkerd
 
-go 1.26.4
+go 1.27.1
 
 replace github.com/kudobuilder/kuttl => github.com/layer5io/kuttl v0.4.1-0.20200723152044-916f10574334
 
@@ -13,8 +13,6 @@ require (
 	k8s.io/api v0.29.0
 	k8s.io/apimachinery v0.29.0
 )
-
-require oras.land/oras-go v1.2.4 // indirect
 
 require (
 	cuelang.org/go v0.6.0 // indirect
@@ -192,6 +190,7 @@ require (
 	k8s.io/kube-openapi v0.0.0-20231113174909-778a5567bc1e // indirect
 	k8s.io/kubectl v0.29.0 // indirect
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b // indirect
+	oras.land/oras-go v1.2.4 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/kustomize/api v0.13.5-0.20230601165947-6ce0bf390ce3 // indirect
 	sigs.k8s.io/kustomize/kyaml v0.14.3-0.20230601165947-6ce0bf390ce3 // indirect
