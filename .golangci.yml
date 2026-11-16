@@ -1,63 +1,39 @@
-linters-settings:
-  gci:
-    enabled: true
-    max-len: 120
-    line-length: 120
-  goconst:
-    enabled: true
-  gocritic:
-    enabled: true
-    disable:
-      - parallelize
-      - nesting
-      - hugeParam
-      - hugeStruct
-      - nestParam
-      - prealloc
-  govet:
-    enabled: true
-    check-shadowing: true
-    tests: true
-  golint:
-    enabled: true
-    min-confidence: 0.8
-  unused:
-    enabled: true
-    check-exported: true
-    check-packages: true
-    check-generated: true
-    tests: true
-    allow-unused-type-export: true
-  cyclop:
-    enabled: true
-    average-strictness: 7
-  scopelint:
-    enabled: true
-    tests: true
-
-
-# Configuration for golangci-lint that is suitable for a Kubernetes operator project built with Golang
-linters:
-  enable-all: false
-  disable-all: false
-  linters:
-    - gci
-    - goconst
-    - gocritic
-    - govet
-    - golint
-    - unused
-    - cyclop
-    - scopelint
-  exclude-rules:
-    - testpackage
+version: 2
 
 run:
-  enable-cache: true
+  timeout: 5m
   skip-dirs:
     - vendor
-    - bundle
-    - config
     - hack
     - helpers
+    - bundle
+    - config
     - img
+
+linters-settings:
+  staticcheck:
+    checks: ["all", "-ST1005"]
+  govet:
+    check-shadowing: false
+  lll:
+    line-length: 120
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - gofmt
+    - goimports
+    - govet
+    - misspell
+    - staticcheck
+    - stylecheck
+    - whitespace
+    - unused
+    - revive
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - errcheck
