@@ -218,4 +218,3 @@ require (
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
 
-replace github.com/layer5io/meshery-adapter-library => github.com/ParthrChandurkar/meshery-adapter-library v0.0.0-20261127210131-d4d11433af67
