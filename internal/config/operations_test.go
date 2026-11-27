@@ -15,18 +15,41 @@
 package config
 
 import (
+	"slices"
 	"testing"
 
 	"github.com/layer5io/meshery-adapter-library/adapter"
 	"github.com/layer5io/meshery-adapter-library/meshes"
-	"github.com/layer5io/meshkit/utils"
 )
 
 func TestGetOperations(t *testing.T) {
 	dev := make(adapter.Operations)
-	dev = getOperations(dev)
+	versions := []string{"stable-2.14.10", "stable-2.14.9"}
+	dev = getOperationsWithVersions(dev, versions)
 
-	// Test for LinkerdOperation
+	t.Run("LinkerdOperation", func(t *testing.T) {
+		assertLinkerdOperation(t, dev, versions)
+	})
+
+	t.Run("AnnotateNamespace", func(t *testing.T) {
+		assertAnnotateNamespace(t, dev)
+	})
+
+	t.Run("JaegerAddon", func(t *testing.T) {
+		assertJaegerAddon(t, dev)
+	})
+
+	t.Run("MultiClusterAddon", func(t *testing.T) {
+		assertMultiClusterAddon(t, dev)
+	})
+
+	t.Run("SMIAddon", func(t *testing.T) {
+		assertSMIAddon(t, dev)
+	})
+}
+
+func assertLinkerdOperation(t *testing.T, dev adapter.Operations, versions []string) {
+	t.Helper()
 	op, exists := dev[LinkerdOperation]
 	if !exists {
 		t.Errorf("Operation %v not found in operations map", LinkerdOperation)
@@ -37,16 +60,12 @@ func TestGetOperations(t *testing.T) {
 	if op.Description != "Linkerd Service Mesh" {
 		t.Errorf("Expected operation description %v but got %v", "Linkerd Service Mesh", op.Description)
 	}
-	versions, err := utils.GetLatestReleaseTagsSorted("linkerd", "linkerd2")
-	if err != nil {
-		t.Errorf("Error while getting latest release tags: %v", err)
-	}
 	var adapterVersions []adapter.Version
 	for _, v := range versions {
 		adapterVersions = append(adapterVersions, adapter.Version(v))
 	}
-	if len(op.Versions) != len(adapterVersions) {
-		t.Errorf("Expected %v versions but got %v", len(adapterVersions), len(op.Versions))
+	if !slices.Equal(op.Versions, adapterVersions) {
+		t.Errorf("Expected versions %v but got %v", adapterVersions, op.Versions)
 	}
 	if len(op.Templates) != 0 {
 		t.Errorf("Expected empty templates slice but got %v templates", len(op.Templates))
@@ -55,8 +74,11 @@ func TestGetOperations(t *testing.T) {
 		t.Errorf("Expected empty additional properties map but got %v properties", len(op.AdditionalProperties))
 	}
 
-	// Test for AnnotateNamespace
-	op, exists = dev[AnnotateNamespace]
+}
+
+func assertAnnotateNamespace(t *testing.T, dev adapter.Operations) {
+	t.Helper()
+	op, exists := dev[AnnotateNamespace]
 	if !exists {
 		t.Errorf("Operation %v not found in operations map", AnnotateNamespace)
 	}
@@ -67,8 +89,11 @@ func TestGetOperations(t *testing.T) {
 		t.Errorf("Expected operation description %v but got %v", "Annotate Namespace", op.Description)
 	}
 
-	// Test for JaegerAddon
-	op, exists = dev[JaegerAddon]
+}
+
+func assertJaegerAddon(t *testing.T, dev adapter.Operations) {
+	t.Helper()
+	op, exists := dev[JaegerAddon]
 	if !exists {
 		t.Errorf("Operation %v not found in operations map", JaegerAddon)
 	}
@@ -88,8 +113,11 @@ func TestGetOperations(t *testing.T) {
 		t.Errorf("Expected %v for %v additional property but got %v", "https://helm.linkerd.io/stable/linkerd-jaeger-30.4.5.tgz", HelmChartURL, op.AdditionalProperties[HelmChartURL])
 	}
 
-	// Test for MultiClusterAddon
-	op, exists = dev[MultiClusterAddon]
+}
+
+func assertMultiClusterAddon(t *testing.T, dev adapter.Operations) {
+	t.Helper()
+	op, exists := dev[MultiClusterAddon]
 	if !exists {
 		t.Errorf("Operation %v not found in operations map", MultiClusterAddon)
 	}
@@ -109,8 +137,11 @@ func TestGetOperations(t *testing.T) {
 		t.Errorf("Expected %v for %v additional property but got %v", "https://helm.linkerd.io/stable/linkerd-multicluster-2.10.2.tgz", HelmChartURL, op.AdditionalProperties[HelmChartURL])
 	}
 
-	// Test for SMIAddon
-	op, exists = dev[SMIAddon]
+}
+
+func assertSMIAddon(t *testing.T, dev adapter.Operations) {
+	t.Helper()
+	op, exists := dev[SMIAddon]
 	if !exists {
 		t.Errorf("Operation %v not found in operations map", SMIAddon)
 	}

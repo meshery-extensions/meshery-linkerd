@@ -1,14 +1,13 @@
 package oam
 
 import (
-	"fmt"
+	"context"
 	"os"
 	"path/filepath"
-	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/layer5io/meshery-adapter-library/adapter"
-	"github.com/layer5io/meshkit/models/meshmodel/core/types"
 )
 
 var (
@@ -27,24 +26,24 @@ type meshmodelDefinitionPathSet struct {
 }
 
 func RegisterMeshModelComponents(uuid, runtime, host, port string) error {
-	meshmodelRDP := []adapter.MeshModelRegistrantDefinitionPath{}
 	pathSets, err := loadMeshmodelComponents(MeshmodelComponents)
 	if err != nil {
 		return err
 	}
-	portint, _ := strconv.Atoi(port)
+
+	paths := make([]string, 0, len(pathSets))
 	for _, pathSet := range pathSets {
-		meshmodelRDP = append(meshmodelRDP, adapter.MeshModelRegistrantDefinitionPath{
-			EntityDefintionPath: pathSet.meshmodelDefinitionPath,
-			Host:                host,
-			Port:                portint,
-			Type:                types.ComponentDefinition,
-		})
+		paths = append(paths, pathSet.meshmodelDefinitionPath)
 	}
 
-	return adapter.
-		NewMeshModelRegistrant(meshmodelRDP, fmt.Sprintf("%s/api/meshmodel/components/register", runtime)).
-		Register(uuid)
+	return adapter.RegisterModernMeshModelComponentFiles(
+		context.Background(),
+		uuid,
+		runtime,
+		host,
+		port,
+		paths,
+	)
 }
 
 func loadMeshmodelComponents(basepath string) ([]meshmodelDefinitionPathSet, error) {
@@ -54,7 +53,8 @@ func loadMeshmodelComponents(basepath string) ([]meshmodelDefinitionPathSet, err
 			return err
 		}
 
-		if info.IsDir() {
+		if !info.Mode().IsRegular() ||
+			!strings.HasSuffix(info.Name(), "_meshmodel.json") {
 			return nil
 		}
 
