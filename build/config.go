@@ -3,16 +3,15 @@ package build
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/layer5io/meshery-adapter-library/adapter"
 
-	"github.com/layer5io/meshkit/utils"
 	"github.com/layer5io/meshkit/utils/manifests"
 	smp "github.com/layer5io/service-mesh-performance/spec"
+	"github.com/meshery/meshkit/utils"
 
 	"github.com/layer5io/meshery-linkerd/internal/config"
 )
@@ -55,18 +54,20 @@ func NewConfig(version string) manifests.Config {
 }
 func init() {
 	// Initialize Metadata including logo svgs
-	f, _ := os.Open("./build/meshmodel_metadata.json")
-	defer func() {
-		if err := f.Close(); err != nil {
-			fmt.Printf("Error closing file: %s\n", err)
-		}
-	}()
-	byt, _ := io.ReadAll(f)
+	byt, err := os.ReadFile("./build/meshmodel_metadata.json")
+	if err != nil {
+		fmt.Printf("Error reading MeshModel metadata: %v\n", err)
+	} else if err := json.Unmarshal(byt, &Meshmodelmetadata); err != nil {
+		fmt.Printf("Error decoding MeshModel metadata: %v\n", err)
+	}
 
-	_ = json.Unmarshal(byt, &Meshmodelmetadata)
 	wd, _ := os.Getwd()
 	MeshModelPath = filepath.Join(wd, "templates", "meshmodel", "components")
-	AllVersions, _ = utils.GetLatestReleaseTagsSorted("linkerd", "linkerd2")
+	AllVersions, err = utils.GetLatestReleaseTagsSorted("linkerd", "linkerd2")
+	if err != nil {
+		fmt.Printf("Linkerd release discovery failed: %v\n", err)
+		return
+	}
 	if len(AllVersions) == 0 {
 		return
 	}

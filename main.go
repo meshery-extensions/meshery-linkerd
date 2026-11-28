@@ -17,6 +17,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"sort"
 	"strings"
 	"time"
 
@@ -179,29 +180,33 @@ func registerWorkloads(port string, log logger.Handler) {
 		return
 	}
 
-	//If a URL is passed from env variable, it will be used for component generation with default method being "using manifests"
-	// In case a helm chart URL is passed, COMP_GEN_METHOD env variable should be set to Helm otherwise the component generation fails
-	if os.Getenv("COMP_GEN_URL") != "" && (os.Getenv("COMP_GEN_METHOD") == "Helm" || os.Getenv("COMP_GEN_METHOD") == "Manifest") {
-		url = os.Getenv("COMP_GEN_URL")
-		gm = os.Getenv("COMP_GEN_METHOD")
-		log.Info("Registering workload components from url ", url, " using ", gm, " method...")
+	if version == "" {
+		log.Error(fmt.Errorf("linkerd release version is unavailable"))
+		return
 	}
+
+	sources, url, gm, err := componentGenerationSources(url, gm)
+	if err != nil {
+		log.Error(err)
+		return
+	}
+
 	log.Info("url: ", url, " method: ", gm)
 	log.Info("Registering latest workload components for version ", version)
 
-	for name, u := range build.CRDnamesURL {
-		if err := adapter.CreateComponents(adapter.StaticCompConfig{
-			URL:             u,
+	if err := adapter.CreateModernComponentsFromSources(
+		sources,
+		adapter.StaticCompConfig{
 			Method:          gm,
 			MeshModelPath:   build.MeshModelPath,
 			MeshModelConfig: build.MeshModelConfig,
 			DirName:         version,
 			Config:          build.NewConfig(version),
-		}); err != nil {
-			log.Error(err)
-			return
-		}
-		log.Info(name, " registered")
+			Force:           true,
+		},
+	); err != nil {
+		log.Error(err)
+		return
 	}
 
 	// The below log is checked in the workflows. If you change this log, reflect that change in the workflow where components are generated
@@ -214,4 +219,31 @@ func registerWorkloads(port string, log logger.Handler) {
 		return
 	}
 	log.Info("Latest workload components successfully registered for version ", version)
+}
+
+func componentGenerationSources(url, gm string) ([]string, string, string, error) {
+	var sources []string
+
+	if customURL := os.Getenv("COMP_GEN_URL"); customURL != "" {
+		url = customURL
+		gm = os.Getenv("COMP_GEN_METHOD")
+		if gm == "" {
+			gm = adapter.Manifests
+		}
+		if gm != adapter.Manifests && gm != adapter.HelmCharts {
+			return nil, url, gm, fmt.Errorf("unsupported generation method: %s", gm)
+		}
+		sources = append(sources, url)
+	} else {
+		for _, source := range build.CRDnamesURL {
+			sources = append(sources, source)
+		}
+	}
+
+	if len(sources) == 0 {
+		return nil, url, gm, fmt.Errorf("no Linkerd component sources available")
+	}
+
+	sort.Strings(sources)
+	return sources, url, gm, nil
 }
